@@ -50,7 +50,6 @@ AI: "The current time is 2:35 PM."
 ### Prerequisites
 
 - **Python 3.10+**
-- **FFmpeg** (required for audio processing)
 - **Groq API Key** ([Get one free](https://console.groq.com))
 - Modern web browser (Chrome/Edge recommended)
 
@@ -79,45 +78,8 @@ source .venv/bin/activate
 
 ```bash
 pip install -r requirements.txt
-```
+``
 
-**Requirements:**
-```txt
-websockets==12.0
-SpeechRecognition==3.10.0
-pydub==0.25.1
-pyttsx3==2.90
-groq==0.4.1
-python-dotenv==1.0.0
-```
-
-### 4. Install FFmpeg
-
-**Windows (Chocolatey):**
-```bash
-choco install ffmpeg
-```
-
-**Windows (Manual):**
-1. Download from [ffmpeg.org](https://ffmpeg.org/download.html)
-2. Extract to `C:\ffmpeg`
-3. Add `C:\ffmpeg\bin` to system PATH
-
-**Linux:**
-```bash
-sudo apt update
-sudo apt install ffmpeg
-```
-
-**macOS:**
-```bash
-brew install ffmpeg
-```
-
-**Verify Installation:**
-```bash
-ffmpeg -version
-```
 
 ### 5. Configure Environment Variables
 
@@ -304,25 +266,7 @@ import tempfile
 ```
 </details>
 
-<details>
-<summary><b>❌ Error: <code>Couldn't find ffmpeg or avconv</code></b></summary>
 
-**Solution:**
-1. Install FFmpeg (see installation section)
-2. Verify in PATH: `ffmpeg -version`
-3. Restart terminal and try again
-</details>
-
-<details>
-<summary><b>❌ Error: <code>[WinError 2] The system cannot find the file specified</code></b></summary>
-
-**Solution:** FFmpeg not in system PATH
-1. Find FFmpeg installation location
-2. Add to system environment variables
-3. Restart terminal/IDE
-</details>
-
-<details>
 <summary><b>🎤 Audio Not Recognized</b></summary>
 
 **Solutions:**
