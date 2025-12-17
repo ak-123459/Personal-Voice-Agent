@@ -8,6 +8,11 @@ A real-time AI Voice Assistant powered by **Groq's Llama 3.3 70B** with voice st
 
 ![AI Voice Assistant Demo](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=AI+Voice+Assistant+Demo)
 
+## 🚩 Important Note
+
+🎤 This project works **only in Google Chrome** due to microphone permission limitations in other browsers.
+
+
 ## ✨ Features
 
 - 🎤 **Real-time Voice Input** - Record and transcribe speech with automatic processing
@@ -127,21 +132,6 @@ npx http-server
 
 # Then open: http://localhost:8000
 ```
-
-## Browser Compatibility Notice
-
-⚠️ **Important:**  
-This project currently works **only in Google Chrome**.
-
-### Reason
-The application uses microphone access (`getUserMedia`) and relies on Chrome-specific handling of microphone permissions.  
-Other browsers (such as Firefox, Edge, or Safari) may block or fail to grant microphone access due to different permission policies.
-
-### Recommendation
-Please open this project in **Google Chrome** and allow microphone permissions when prompted.
-
-### Future Improvements
-Cross-browser compatibility will be addressed in future updates.
 
 ### Using the Assistant
 
