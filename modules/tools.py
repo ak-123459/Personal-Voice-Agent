@@ -1,5 +1,6 @@
-from function import *
-from reminders import *
+from .function import *
+from .reminders import *
+
 
 tools = [
     {
@@ -16,7 +17,7 @@ tools = [
     },
     {
         "type": "function",
-        "function": {"name": "play_music", "description": "Play music", "parameters": {"type": "object", "properties": {"query": {"type": "string"}, "shuffle": {"type": "boolean", "default": False}}, "required": ["query"]}}
+        "function": {"name": "play_youtube", "description": "Play youtube", "parameters": {"type": "object", "properties": {"query": {"type": "string"}, "shuffle": {"type": "boolean", "default": False}}, "required": ["query"]}}
     },
     {
         "type": "function",
@@ -40,13 +41,15 @@ tools = [
     }
 ]
 
+
 function_map = {
     "set_reminder": set_reminder,
     "send_message": send_message,
-    "play_music": play_music,
+    "play_youtube": play_youtube,
     "get_reminders": get_reminders,
     "get_messages": get_messages,
     "delete_reminder": delete_reminder,
     "get_current_time": get_current_time,
     "get_current_date": get_current_date
 }
+

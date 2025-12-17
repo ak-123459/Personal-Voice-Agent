@@ -86,49 +86,27 @@ tools = [
             }
         }
     },
+    
     {
-        "type": "function",
-        "function": {
-            "name": "send_message",
-            "description": "Send a message or note",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "recipient": {
-                        "type": "string",
-                        "description": "The recipient of the message"
-                    },
-                    "content": {
-                        "type": "string",
-                        "description": "The message content"
-                    }
-                },
-                "required": ["content"]
-            }
+    "type": "function",
+    "function": {
+        "name": "play_youtube",
+        "description": "Play music or videos on YouTube. Use this for any music-related requests, songs, playlists, artists, genres, or video content.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "What to search and play on YouTube - can be song name, artist, genre, mood, or video title"
+                }
+            },
+            "required": ["query"]
         }
-    },
-    {
-        "type": "function",
-        "function": {
-            "name": "play_music",
-            "description": "Play music based on genre, mood, artist, or song name",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "Genre, mood, artist, or song name to play"
-                    },
-                    "shuffle": {
-                        "type": "boolean",
-                        "description": "Whether to shuffle the playlist",
-                        "default": False
-                    }
-                },
-                "required": ["query"]
-            }
-        }
-    },
+    }
+}
+
+
+    ,
     {
         "type": "function",
         "function": {
@@ -229,19 +207,24 @@ def send_message(content: str, recipient: str = "default") -> Dict:
     }
 
 
-def play_music(query: str, shuffle: bool = False) -> dict:
+def play_youtube(query: str) -> dict:
+    """Open YouTube with search query - handles all music and video playback"""
     yt_query = urllib.parse.quote(query)
     url = f"https://www.youtube.com/results?search_query={yt_query}"
     webbrowser.open(url)
 
     return {
         "success": True,
-        "message": f"Opening YouTube for {query}",
+        "message": f"Opening YouTube to play: {query}",
         "data": {
             "platform": "YouTube",
-            "query": query
+            "query": query,
+            "url": url
         }
     }
+
+
+
 
 
 def get_reminders() -> Dict:
@@ -342,7 +325,7 @@ async def check_reminders_background(websocket):
 function_map = {
     "set_reminder": set_reminder,
     "send_message": send_message,
-    "play_music": play_music,
+    "play_youtube": play_youtube,
     "get_reminders": get_reminders,
     "get_messages": get_messages,
     "delete_reminder": delete_reminder,
@@ -358,6 +341,8 @@ class AIVoiceAssistant:
         self.recognizer.dynamic_energy_threshold = True
 
     async def process_command(self, user_message: str, conversation_history: List[Dict]) -> Dict:
+
+
         try:
             # Build messages (ONLY dicts)
             messages = conversation_history + [
@@ -406,11 +391,16 @@ class AIVoiceAssistant:
                 if function_args is None:
                     function_args = {}
 
-                # Convert string "true"/"false" to boolean
+                # ✅ IMPROVED: Convert string booleans to actual booleans
                 if function_args:
-                    for key, value in function_args.items():
-                        if isinstance(value, str) and value.lower() in ["true", "false"]:
-                            function_args[key] = value.lower() == "true"
+                    for key, value in list(function_args.items()):
+                        if isinstance(value, str):
+                            value_lower = value.lower()
+                            if value_lower in ["true", "false"]:
+                                function_args[key] = (value_lower == "true")
+                            # Also handle "1" and "0" as booleans
+                            elif value in ["1", "0"]:
+                                function_args[key] = (value == "1")
 
                 if function_name in function_map:
                     result = function_map[function_name](**function_args)
@@ -470,11 +460,16 @@ class AIVoiceAssistant:
 
         except Exception as e:
             print(f"Error processing command: {e}")
+            import traceback
+            traceback.print_exc()
             return {
                 "status": "error",
                 "message": str(e),
                 "function_called": None
             }
+
+
+
 
     def process_audio(self, base64_audio: str) -> str:
         """
@@ -529,14 +524,15 @@ assistant = AIVoiceAssistant()
 SYSTEM_PROMPT = """You are a helpful, friendly voice assistant. You can:
 - Set reminders and manage them
 - Send messages
-- Play music based on user preferences
+- Play music and videos on YouTube (any song, artist, genre, or video)
 - Answer questions and provide information
 - Tell the current time and date
+
+For ANY music-related request (play song, artist, genre, playlist, mood music), use the play_youtube function.
 
 Be conversational, concise, and helpful. When users ask you to do something, use the appropriate function.
 Keep responses brief for voice interaction (1-3 sentences unless more detail is requested).
 Be proactive in suggesting related actions when appropriate."""
-
 
 async def handle_client(websocket, path):
     """Handle WebSocket client connection with logging"""
