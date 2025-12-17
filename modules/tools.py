@@ -17,7 +17,7 @@ tools = [
     },
     {
         "type": "function",
-        "function": {"name": "play_youtube", "description": "Play youtube", "parameters": {"type": "object", "properties": {"query": {"type": "string"}, "shuffle": {"type": "boolean", "default": False}}, "required": ["query"]}}
+        "function": {"name": "play_youtube", "description": "Play youtube", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}
     },
     {
         "type": "function",
