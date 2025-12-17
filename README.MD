@@ -100,10 +100,10 @@ Get your Groq API key: [https://console.groq.com/keys](https://console.groq.com/
 
 ## 🎮 Usage
 
-### Start the Server
+### Run the main.py
 
 ```bash
-python server.py
+python main.py
 ```
 
 Expected output:
@@ -225,7 +225,7 @@ npx http-server
 
 ### Adjust Speech Recognition Sensitivity
 
-Edit `server.py`:
+Edit `main.py`:
 ```python
 def __init__(self):
     self.recognizer = sr.Recognizer()
@@ -244,7 +244,7 @@ setTimeout(() => {
 
 ### Modify AI Model
 
-Edit `server.py`:
+Edit `main.py`:
 ```python
 response = client.chat.completions.create(
     model="llama-3.3-70b-versatile",  # Change model
@@ -265,7 +265,7 @@ response = client.chat.completions.create(
 <details>
 <summary><b>❌ Error: <code>name 'tempfile' is not defined</code></b></summary>
 
-**Solution:** Add import at top of `server.py`:
+**Solution:** Add import at top of `main.py`:
 ```python
 import tempfile
 ```
@@ -286,7 +286,7 @@ import tempfile
 <summary><b>🔌 WebSocket Connection Failed</b></summary>
 
 **Solutions:**
-- Ensure server is running: `python server.py`
+- Ensure main is running: `python main.py`
 - Check port 8765 is available
 - Disable firewall temporarily
 - Check browser console (F12) for errors
@@ -304,7 +304,7 @@ import tempfile
 
 ### Debug Mode
 
-Enable detailed logging in `server.py` by checking console output:
+Enable detailed logging in `main.py` by checking console output:
 
 ```
 [DEBUG] Starting audio processing...
@@ -322,18 +322,18 @@ Enable detailed logging in `server.py` by checking console output:
 
 ```bash
 # Test reminder
-python -c "from server import set_reminder; print(set_reminder('Test', 5))"
+python -c "from main import set_reminder; print(set_reminder('Test', 5))"
 
 # Test time
-python -c "from server import get_current_time; print(get_current_time())"
+python -c "from main import get_current_time; print(get_current_time())"
 
 # Test message
-python -c "from server import send_message; print(send_message('Hello'))"
+python -c "from main import send_message; print(send_message('Hello'))"
 ```
 
 ### Test WebSocket Connection
 
-1. Start server: `python server.py`
+1. Start main: `python main.py`
 2. Open browser console (F12)
 3. Check for connection logs
 4. Send test message
@@ -395,7 +395,7 @@ Thumbs.db
 
 ### Using Groq Whisper for Better Transcription
 
-Replace Google Speech Recognition with Groq Whisper in `server.py`:
+Replace Google Speech Recognition with Groq Whisper in `main.py`:
 
 ```python
 def process_audio(self, base64_audio: str) -> str:
@@ -426,7 +426,7 @@ def process_audio(self, base64_audio: str) -> str:
 
 ### Custom Functions
 
-Add new functions to `tools` array and `function_map` in `server.py`:
+Add new functions to `tools` array and `function_map` in `main.py`:
 
 ```python
 # Define tool
