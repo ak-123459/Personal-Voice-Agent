@@ -17,7 +17,7 @@ tools = [
     },
     {
         "type": "function",
-        "function": {"name": "play_youtube", "description": "Play youtube", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}
+        "function": {"name": "play_youtube", "description": "Search and play a YouTube video using a text query. Example: {\"query\": \"relaxing music\"}", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}
     },
     {
         "type": "function",
