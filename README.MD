@@ -128,6 +128,21 @@ npx http-server
 # Then open: http://localhost:8000
 ```
 
+## Browser Compatibility Notice
+
+⚠️ **Important:**  
+This project currently works **only in Google Chrome**.
+
+### Reason
+The application uses microphone access (`getUserMedia`) and relies on Chrome-specific handling of microphone permissions.  
+Other browsers (such as Firefox, Edge, or Safari) may block or fail to grant microphone access due to different permission policies.
+
+### Recommendation
+Please open this project in **Google Chrome** and allow microphone permissions when prompted.
+
+### Future Improvements
+Cross-browser compatibility will be addressed in future updates.
+
 ### Using the Assistant
 
 #### Voice Commands
