@@ -10,7 +10,7 @@ A real-time AI Voice Assistant powered by **Groq's Llama 3.3 70B** with voice st
 
 
 ## 👇👇👇👇👇👇👇👇
-[▶️ Watch Demo Video](https://www.youtube.com/watch?v=VIDEO_ID)
+[▶️ Watch Demo Video](https://drive.google.com/file/d/10ph1YPkrYf3LFMKGcNa6Pcn4xy8p0d6d/view?usp=drivesdk)
 
 
 ## 🚩 Important Note
