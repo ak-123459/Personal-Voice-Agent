@@ -8,6 +8,11 @@ A real-time AI Voice Assistant powered by **Groq's Llama 3.3 70B** with voice st
 
 ![AI Voice Assistant Demo](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=AI+Voice+Assistant+Demo)
 
+
+## 👇👇👇👇👇👇👇👇
+[▶️ Watch Demo Video](https://www.youtube.com/watch?v=VIDEO_ID)
+
+
 ## 🚩 Important Note
 
 🎤 This project works **only in Google Chrome** due to microphone permission limitations in other browsers.
